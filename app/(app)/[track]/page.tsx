@@ -21,20 +21,27 @@ export default async function TrackCompanyListPage({
 
   return (
     <div>
-      <Link href="/" className="text-sm text-slate-500 hover:text-slate-800">
+      <Link
+        href="/"
+        className="text-sm text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200"
+      >
         &larr; Back
       </Link>
-      <h1 className="mt-2 text-xl font-semibold text-slate-900">{TRACK_LABELS[track]}</h1>
+      <h1 className="mt-2 text-xl font-semibold text-slate-900 dark:text-slate-50">
+        {TRACK_LABELS[track]}
+      </h1>
 
       {!companies || companies.length === 0 ? (
-        <p className="mt-6 text-sm text-slate-500">No companies yet for this track.</p>
+        <p className="mt-6 text-sm text-slate-500 dark:text-slate-400">
+          No companies yet for this track.
+        </p>
       ) : (
-        <ul className="mt-6 divide-y divide-slate-200 overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <ul className="mt-6 divide-y divide-slate-200 overflow-hidden rounded-xl border border-slate-200 bg-white dark:divide-slate-800 dark:border-slate-800 dark:bg-slate-900">
           {companies.map((c: { id: string; canonical_name: string }) => (
             <li key={c.id}>
               <Link
                 href={`/${track}/${c.id}`}
-                className="block px-5 py-3 text-slate-800 transition hover:bg-slate-50"
+                className="block px-5 py-3 text-slate-800 transition hover:bg-slate-50 dark:text-slate-200 dark:hover:bg-slate-800"
               >
                 {c.canonical_name}
               </Link>
