@@ -9,7 +9,8 @@
 // — this script is the one place in the project that bypasses RLS; it never runs in the
 // deployed app).
 
-import 'dotenv/config';
+import { config as loadEnv } from 'dotenv';
+loadEnv({ path: '.env.local' }); // dotenv/config alone only reads .env, not .env.local
 import path from 'node:path';
 import * as readline from 'node:readline/promises';
 import ExcelJS from 'exceljs';
@@ -97,6 +98,8 @@ async function loadExistingCompanies(): Promise<CompanyRow[]> {
 }
 
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+const INTERACTIVE = process.stdin.isTTY === true;
+const needsReview: string[] = [];
 
 async function resolveCompany(
   rawNameInput: string,
@@ -127,13 +130,23 @@ async function resolveCompany(
   if (best && best.score >= 0.92) {
     targetId = best.company.id;
   } else if (best && best.score >= 0.6) {
-    const answer = await rl.question(
-      `  "${rawName}" looks similar to existing company "${best.company.canonical_name}" ` +
-        `(similarity ${Math.round(best.score * 100)}%). Same company? [y/N] `
-    );
-    if (answer.trim().toLowerCase().startsWith('y')) {
-      targetId = best.company.id;
+    if (INTERACTIVE) {
+      const answer = await rl.question(
+        `  "${rawName}" looks similar to existing company "${best.company.canonical_name}" ` +
+          `(similarity ${Math.round(best.score * 100)}%). Same company? [y/N] `
+      );
+      if (answer.trim().toLowerCase().startsWith('y')) {
+        targetId = best.company.id;
+      } else {
+        targetId = await createCompany(rawName, existing);
+      }
     } else {
+      // Non-interactive (e.g. run by an agent): never silently merge on a guess.
+      // Create as a new company and flag it for the coordinator to merge manually
+      // in the Supabase Table Editor if it really is a duplicate.
+      needsReview.push(
+        `"${rawName}" vs existing "${best.company.canonical_name}" (${Math.round(best.score * 100)}% similar)`
+      );
       targetId = await createCompany(rawName, existing);
     }
   } else {
@@ -262,6 +275,10 @@ async function main() {
   console.log(
     `Done. Inserted ${inserted}, skipped ${skippedDuplicate} duplicate(s), ${skippedEmpty} empty row(s).`
   );
+  if (needsReview.length > 0) {
+    console.log(`\nPossible duplicate companies — created as new, review manually if needed:`);
+    for (const line of needsReview) console.log(`  - ${line}`);
+  }
   rl.close();
 }
 
