@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
+import CompanySearchList from './company-search-list';
 
 const TRACK_LABELS: Record<string, string> = {
   placements: 'Placements',
@@ -36,18 +37,7 @@ export default async function TrackCompanyListPage({
           No companies yet for this track.
         </p>
       ) : (
-        <ul className="mt-6 divide-y divide-slate-200 overflow-hidden rounded-xl border border-slate-200 bg-white dark:divide-slate-800 dark:border-slate-800 dark:bg-slate-900">
-          {companies.map((c: { id: string; canonical_name: string }) => (
-            <li key={c.id}>
-              <Link
-                href={`/${track}/${c.id}`}
-                className="block px-5 py-3 text-slate-800 transition hover:bg-slate-50 dark:text-slate-200 dark:hover:bg-slate-800"
-              >
-                {c.canonical_name}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <CompanySearchList track={track} companies={companies} />
       )}
     </div>
   );

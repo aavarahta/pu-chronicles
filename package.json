@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "import": "tsx scripts/import.ts"
+    "import": "tsx scripts/import.ts",
+    "merge-companies": "tsx scripts/merge-companies.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
