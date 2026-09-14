@@ -13,21 +13,25 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   } = await supabase.auth.getUser();
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
-      <ConfidentialityNotice />
-      <header className="flex items-center justify-between border-b border-slate-200 bg-white px-6 py-4 dark:border-slate-800 dark:bg-slate-900">
-        <Link href="/" className="font-semibold text-slate-900 dark:text-slate-50">
-          PU Chronicles
-        </Link>
-        <div className="flex items-center gap-4">
-          {user?.email && (
-            <span className="text-sm text-slate-500 dark:text-slate-400">{user.email}</span>
-          )}
-          <ThemeToggle />
-          <SignOutButton />
-        </div>
-      </header>
-      <main className="mx-auto max-w-3xl px-6 py-10">{children}</main>
+    <div className="relative min-h-screen bg-[url('/campus-background.webp')] bg-cover bg-center bg-fixed">
+      <div className="absolute inset-0 bg-white/85 dark:bg-slate-950/85" />
+
+      <div className="relative z-10">
+        <ConfidentialityNotice />
+        <header className="flex items-center justify-between border-b border-slate-200 bg-white px-6 py-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <Link href="/" className="font-semibold text-slate-900 dark:text-slate-50">
+            PU Chronicles
+          </Link>
+          <div className="flex items-center gap-4">
+            {user?.email && (
+              <span className="text-sm text-slate-500 dark:text-slate-400">{user.email}</span>
+            )}
+            <ThemeToggle />
+            <SignOutButton />
+          </div>
+        </header>
+        <main className="mx-auto max-w-3xl px-6 py-10">{children}</main>
+      </div>
     </div>
   );
 }

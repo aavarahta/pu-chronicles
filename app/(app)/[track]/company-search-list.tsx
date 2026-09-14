@@ -25,7 +25,7 @@ export default function CompanySearchList({
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search companies…"
         autoFocus
-        className="mt-6 w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500"
+        className="mt-6 w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm text-slate-900 shadow-md placeholder:text-slate-400 focus:border-slate-400 focus:outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500"
       />
 
       {filtered.length === 0 ? (
@@ -33,7 +33,7 @@ export default function CompanySearchList({
           No companies match &ldquo;{query}&rdquo;.
         </p>
       ) : (
-        <ul className="mt-4 divide-y divide-slate-200 overflow-hidden rounded-xl border border-slate-200 bg-white dark:divide-slate-800 dark:border-slate-800 dark:bg-slate-900">
+        <ul className="mt-4 divide-y divide-slate-200 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-md dark:divide-slate-800 dark:border-slate-800 dark:bg-slate-900">
           {filtered.map((c) => (
             <li key={c.id}>
               <Link

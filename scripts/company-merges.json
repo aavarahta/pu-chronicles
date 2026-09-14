@@ -36,6 +36,9 @@
   { "track": "placements", "canonical": "Larsen & Toubro (L&T)", "members": ["Larson & Toubro (L&T)"] },
   { "track": "placements", "canonical": "ExxonMobil", "members": ["EXXONMOBIL"] },
   { "track": "placements", "canonical": "NXP Semiconductors", "members": ["Nxp semiconductors"] },
+  { "track": "placements", "canonical": "Honeywell", "members": ["Honeywell", "Honeywell UOP"] },
+  { "track": "placements", "canonical": "Western Digital", "members": ["Western Digital", "Western Digital - Sandisk"] },
+  { "track": "placements", "canonical": "IDFC FIRST Bank", "members": ["IDFC", "IDFC Bank"] },
 
   { "track": "sip", "canonical": "Adobe", "members": ["Adobe", "Adobe - Media and Data Science Research (MDSR)", "Adobe MDSR"] },
   { "track": "sip", "canonical": "BNY Mellon", "members": ["BNY", "BNY - MELLON", "BNY Mellon"] },
@@ -49,5 +52,6 @@
   { "track": "sip", "canonical": "Standard Chartered", "members": ["Standard Chartered", "Standard Chartered GBS"] },
   { "track": "sip", "canonical": "Texas Instruments", "members": ["Texas Instrumentation", "Texas Instruments", "TI"] },
   { "track": "sip", "canonical": "Walmart", "members": ["Walmart", "Walmart Global Tech India"] },
-  { "track": "sip", "canonical": "Caterpillar", "members": ["caterpillar"] }
+  { "track": "sip", "canonical": "Caterpillar", "members": ["caterpillar"] },
+  { "track": "sip", "canonical": "Honeywell", "members": ["Honeywell", "Honeywell UOP"] }
 ]

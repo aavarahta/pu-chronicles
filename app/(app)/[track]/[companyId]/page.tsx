@@ -51,7 +51,7 @@ export default async function CompanyPage({
         {(responses as ResponseRow[] | null)?.map((r) => (
           <article
             key={r.id}
-            className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900"
+            className="rounded-xl border border-slate-200 bg-white p-6 shadow-md dark:border-slate-800 dark:bg-slate-900"
           >
             <div className="mb-4 text-xs font-medium uppercase tracking-wide text-slate-400 dark:text-slate-500">
               {r.cycle_label}
